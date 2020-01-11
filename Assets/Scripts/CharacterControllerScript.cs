@@ -14,17 +14,24 @@ public class CharacterControllerScript : MonoBehaviour
 	//ссылка на слой, представляющий землю
 	public LayerMask whatIsGround;
     //переменная для установки макс. скорости персонажа
-    public float maxSpeed = 10f; 
+    public float maxSpeed = 10f;
+    public float jumpForce = 600;
+    public float jumpForceExtra = 300;
     //переменная для определения направления персонажа вправо/влево
     private bool isFacingRight = true;
     //ссылка на компонент анимаций
     private Animator anim;
+
+
+	private int extraJumps;
+	public int extraJumpsValue;
 
     /// <summary>
     /// Начальная инициализация
     /// </summary>
 	private void Start()
     {
+	extraJumps = extraJumpsValue;
         anim = GetComponent<Animator>();
     }
 	
@@ -71,14 +78,22 @@ public class CharacterControllerScript : MonoBehaviour
     /// </summary>
 	private void Update()
 	{
+		if (isGrounded == true)
+		{
+			extraJumps = extraJumpsValue;
+		}
 		//если персонаж на земле и нажат пробел...
-		if (isGrounded && Input.GetKeyDown (KeyCode.Space)) 
+		if (extraJumps > 0 && Input.GetKeyDown (KeyCode.Space)) 
 		{
 			//устанавливаем в аниматоре переменную в false
 			anim.SetBool("Ground", false);
 			//прикладываем силу вверх, чтобы персонаж подпрыгнул
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 600));				
-		}
+            		GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForce));
+			extraJumps--;				
+		} else if (extraJumps == 0 && Input.GetKeyDown (KeyCode.Space) && isGrounded == true)
+				{
+				GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForceExtra));		
+				}
 	}
     private void Flip()
     {
