@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class CharacterControllerScript : MonoBehaviour
 {
+	private Rigidbody2D rb;
     //находится ли персонаж на земле или в прыжке?
 	private bool isGrounded = false;
 	//ссылка на компонент Transform объекта
@@ -16,7 +17,9 @@ public class CharacterControllerScript : MonoBehaviour
     //переменная для установки макс. скорости персонажа
     public float maxSpeed = 10f;
     public float jumpForce = 600;
-    public float jumpForceExtra = 300;
+    private float jumpTimeCounter;
+    public float jumpTime;
+    private bool isJumping;
     //переменная для определения направления персонажа вправо/влево
     private bool isFacingRight = true;
     //ссылка на компонент анимаций
@@ -33,6 +36,7 @@ public class CharacterControllerScript : MonoBehaviour
     {
 	extraJumps = extraJumpsValue;
         anim = GetComponent<Animator>();
+	rb = GetComponent<Rigidbody2D>();
     }
 	
     /// <summary>
@@ -48,8 +52,8 @@ public class CharacterControllerScript : MonoBehaviour
 		//устанавливаем в аниматоре значение скорости взлета/падения
 		anim.SetFloat ("vSpeed", GetComponent<Rigidbody2D>().velocity.y);
         //если персонаж в прыжке - выход из метода, чтобы не выполнялись действия, связанные с бегом
-        if (!isGrounded)
-            return;
+        /*if (!isGrounded)
+            return;*/
         //используем Input.GetAxis для оси Х. метод возвращает значение оси в пределах от -1 до 1.
         //при стандартных настройках проекта 
         //-1 возвращается при нажатии на клавиатуре стрелки влево (или клавиши А),
@@ -85,15 +89,30 @@ public class CharacterControllerScript : MonoBehaviour
 		//если персонаж на земле и нажат пробел...
 		if (extraJumps > 0 && Input.GetKeyDown (KeyCode.Space)) 
 		{
+			isJumping = true;
+			jumpTimeCounter = jumpTime;
 			//устанавливаем в аниматоре переменную в false
 			anim.SetBool("Ground", false);
 			//прикладываем силу вверх, чтобы персонаж подпрыгнул
-            		GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForce));
+            		rb.velocity = Vector2.up * jumpForce;
 			extraJumps--;				
 		} else if (extraJumps == 0 && Input.GetKeyDown (KeyCode.Space) && isGrounded == true)
 				{
-				GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForceExtra));		
+				rb.velocity = Vector2.up * jumpForce;		
 				}
+		if(Input.GetKey(KeyCode.Space)){
+			
+			if(jumpTimeCounter > 0){
+				rb.velocity = Vector2.up * jumpForce;
+				jumpTimeCounter -= Time.deltaTime;				
+			} else {
+				isJumping = false;			
+			}
+		}
+
+		if(Input.GetKeyUp(KeyCode.Space)){
+			isJumping = false;		
+		}
 	}
     private void Flip()
     {
