@@ -790,7 +790,7 @@ MonoBehaviour:
   m_RefResolutionX: 336
   m_RefResolutionY: 115
   m_UpscaleRT: 0
-  m_PixelSnapping: 1
+  m_PixelSnapping: 0
   m_CropFrameX: 0
   m_CropFrameY: 0
   m_StretchFill: 0
@@ -955,7 +955,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 964236299}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 14.7, y: -3.9102712, z: 12.86}
+  m_LocalPosition: {x: 14.7, y: -1.2, z: 12.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 488476131}
@@ -1025,7 +1025,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 804800523}
-  parallaxEffect: 0.5
+  parallaxEffectX: 0.5
+  parallaxEffectY: 0.6
 --- !u!1 &1190809741
 GameObject:
   m_ObjectHideFlags: 0
@@ -1096,7 +1097,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   maxSpeed: 7
-  jumpForce: 300
+  jumpForce: 500
   jumpForceExtra: 300
   extraJumpsValue: 1
 --- !u!95 &1314660595
@@ -1448,11 +1449,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1478470183}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f106f61dd3a010fd881cd5759558584, type: 3}
+  m_Script: {fileID: 11500000, guid: 8025839f672fdb13f8c26dfd1214e444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 804800523}
-  parallaxEffect: 1
+  parallaxEffectX: 1
 --- !u!1 &1542603302
 GameObject:
   m_ObjectHideFlags: 0
@@ -1590,7 +1591,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1901155029}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 10.099998, y: -5.230271, z: 12.25}
+  m_LocalPosition: {x: 10.099998, y: -4.28, z: 12.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4764076}
@@ -1660,7 +1661,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 804800523}
-  parallaxEffect: 0.2
+  parallaxEffectX: 0.2
+  parallaxEffectY: 0.2
 --- !u!1 &1923122124
 GameObject:
   m_ObjectHideFlags: 0
@@ -1756,11 +1758,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1923122124}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f106f61dd3a010fd881cd5759558584, type: 3}
+  m_Script: {fileID: 11500000, guid: 8025839f672fdb13f8c26dfd1214e444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 804800523}
-  parallaxEffect: 0.8
+  cam: {fileID: 0}
+  parallaxEffectX: 0.8
 --- !u!1 &1945280995
 GameObject:
   m_ObjectHideFlags: 0
