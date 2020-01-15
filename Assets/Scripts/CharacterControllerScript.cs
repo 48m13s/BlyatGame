@@ -52,8 +52,8 @@ public class CharacterControllerScript : MonoBehaviour
 		//устанавливаем в аниматоре значение скорости взлета/падения
 		anim.SetFloat ("vSpeed", GetComponent<Rigidbody2D>().velocity.y);
         //если персонаж в прыжке - выход из метода, чтобы не выполнялись действия, связанные с бегом
-        if (!isGrounded)
-            return;
+        /*if (!isGrounded)
+            return;*/
         //используем Input.GetAxis для оси Х. метод возвращает значение оси в пределах от -1 до 1.
         //при стандартных настройках проекта 
         //-1 возвращается при нажатии на клавиатуре стрелки влево (или клавиши А),
@@ -94,11 +94,11 @@ public class CharacterControllerScript : MonoBehaviour
 			//устанавливаем в аниматоре переменную в false
 			anim.SetBool("Ground", false);
 			//прикладываем силу вверх, чтобы персонаж подпрыгнул
-            		GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForce));
+            		rb.velocity = Vector2.up * jumpForce;
 			extraJumps--;				
 		} else if (extraJumps == 0 && Input.GetKeyDown (KeyCode.Space) && isGrounded == true)
 				{
-				GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForce));		
+				rb.velocity = Vector2.up * jumpForce;		
 				}
 		if(Input.GetKey(KeyCode.Space)){
 			

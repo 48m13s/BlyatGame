@@ -1096,7 +1096,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
-  maxSpeed: 10
+  maxSpeed: 7
   jumpForce: 6
   jumpTime: 0.3
   extraJumpsValue: 1
