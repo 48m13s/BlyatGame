@@ -1096,7 +1096,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   maxSpeed: 7
-  jumpForce: 800
+  jumpForce: 300
   jumpForceExtra: 300
   extraJumpsValue: 1
 --- !u!95 &1314660595
