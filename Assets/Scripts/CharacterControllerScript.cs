@@ -82,6 +82,8 @@ public class CharacterControllerScript : MonoBehaviour
     /// </summary>
 	private void Update()
 	{
+		
+
 		if (isGrounded == true)
 		{
 			extraJumps = extraJumpsValue;
@@ -114,6 +116,7 @@ public class CharacterControllerScript : MonoBehaviour
 			isJumping = false;		
 		}
 	}
+	
     private void Flip()
     {
         //меняем направление движения персонажа
