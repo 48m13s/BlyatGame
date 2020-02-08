@@ -18,17 +18,36 @@ public class CharacterControllerScript : MonoBehaviour {
 	private float jumpTimeCounter;
 	public float jumpTime;
 	public bool isJumping;
+	 private bool isFacingRight = true;
+    //ссылка на компонент анимаций
+    private Animator anim;
+
+	public float maxSpeed = 10f;
 
 	void Start(){
 		rb = GetComponent<Rigidbody2D>();
+		anim = GetComponent<Animator>();
 	}
 
 	void FixedUpdate(){
-		rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
+			float move = Input.GetAxis("Horizontal");
+
+        //в компоненте анимаций изменяем значение параметра Speed на значение оси Х.
+        //приэтом нам нужен модуль значения
+        anim.SetFloat("Speed", Mathf.Abs(move));
+
+		GetComponent<Rigidbody2D>().velocity = new Vector2(move * maxSpeed, GetComponent<Rigidbody2D>().velocity.y);
+
+		if(move > 0 && !isFacingRight)
+            //отражаем персонажа вправо
+            Flip();
+        //обратная ситуация. отражаем персонажа влево
+        else if (move < 0 && isFacingRight)
+            Flip();
 	}
 
 	public void Move(int InputAxis){
-		moveInput = InputAxis;
+		moveInput = Input.GetAxis;
 	}
 
 	public void jump(){
@@ -40,6 +59,8 @@ public class CharacterControllerScript : MonoBehaviour {
 			if(jumpTimeCounter > 0){
 				rb.velocity = Vector2.up * jumpForce;
 				jumpTimeCounter -= Time.deltaTime;
+			} else {
+				isJumping = false;
 			}
 		}
 
@@ -47,5 +68,17 @@ public class CharacterControllerScript : MonoBehaviour {
 	public void jump3(){
 			isJumping = false;
 	} 
+
+	private void Flip()
+    {
+        //меняем направление движения персонажа
+        isFacingRight = !isFacingRight;
+        //получаем размеры персонажа
+        Vector3 theScale = transform.localScale;
+        //зеркально отражаем персонажа по оси Х
+        theScale.x *= -1;
+        //задаем новый размер персонажа, равный старому, но зеркально отраженный
+        transform.localScale = theScale;
+    }
 
 }
